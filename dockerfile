@@ -14,7 +14,9 @@ COPY index.html /app
 COPY requirements.txt /app
 
 # Install Flask and other necessary packages
-RUN pip install -r requirements.txt
+RUN pip install --upgrade pip
+
+RUN pip install Flask
 
 # Install additional packages: VIM, Netstat, Nginx, Wget
 RUN apt-get update && apt-get install -y vim net-tools nginx wget
@@ -23,4 +25,4 @@ RUN apt-get update && apt-get install -y vim net-tools nginx wget
 EXPOSE 5000
 
 # Command to run the application
-CMD ["python", "app.py"]
+CMD service nginx start && python app.py
